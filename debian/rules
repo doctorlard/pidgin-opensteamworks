@@ -1,0 +1,30 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+export DH_OPTIONS
+
+DEB_HOST_ARCH ?= $(shell dpkg-architecture -qDEB_BUILD_ARCH)
+confflags ?= $(shell dpkg-buildflags --export=configure)
+export DEB_DIR=$(CURDIR)/debian/pidgin-opensteamworks
+export DEB_DATA_DIR=$(DEB_DIR)/usr/share
+
+%:
+	dh $@
+
+clean:
+	$(MAKE) -C $(CURDIR)/steam-mobile clean
+	dh_testdir
+	dh_testroot
+	dh_clean
+
+override_dh_auto_build:
+	$(confflags) $(MAKE) -C $(CURDIR)/steam-mobile
+
+override_dh_auto_install:
+	$(MAKE) -C $(CURDIR)/steam-mobile install \
+		DESTDIR=$(DEB_DIR) \
+		PIDGIN_PLUGIN_DIR=$(DEB_DIR) \
+		PIDGIN_DATA_DIR=$(DEB_DATA_DIR)

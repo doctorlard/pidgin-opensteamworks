@@ -1,0 +1,19 @@
+Source: pidgin-opensteamworks
+Section: net
+Priority: extra
+Maintainer: Jonathan Harker <jon@jon.geek.nz>
+Build-Depends: debhelper (>= 7.0.50~), autotools-dev,
+ libglib2.0-dev (>= 2.16.0), pidgin-dev (>= 2.6.0),
+ libjson-glib-dev (>= 1.0.2), libgnome-keyring-dev, libnss3-dev,
+ zlib1g-dev
+Standards-Version: 3.9.6
+Homepage: https://github.com/EionRobb/pidgin-opensteamworks/
+Vcs-Git: git@github.com:EionRobb/pidgin-opensteamworks.git
+Vcs-Browser: https://github.com/EionRobb/pidgin-opensteamworks
+
+Package: pidgin-opensteamworks
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, pidgin (>= 2.6.0),
+ libjson-glib-1.0-0 (>= 1.0.2), zlib1g, libnss3, libgnome-keyring0
+Description: Pidgin plugin for Steam
+ A Pidgin plugin for the Steam chat protocol.
